@@ -210,7 +210,11 @@ RCT_EXPORT_METHOD(receiptData:(RCTResponseSenderBlock)callback)
     NSString *key = RCTKeyForInstance(request);
     RCTResponseSenderBlock callback = _callbacks[key];
     if (callback) {
-        products = [NSMutableArray arrayWithArray:response.products];
+        NSMutableArray *p = [NSMutableArray arrayWithArray:response.products];
+        if (products) {
+            [p addObjectsFromArray:products];
+        }
+        products = p;
         NSMutableArray *productsArrayForJS = [NSMutableArray array];
         for(SKProduct *item in response.products) {
             NSDictionary *introductoryPrice = nil;
