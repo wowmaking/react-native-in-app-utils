@@ -292,7 +292,7 @@ RCT_EXPORT_METHOD(receiptData:(RCTResponseSenderBlock)callback)
         @"transactionDate": @(transaction.transactionDate.timeIntervalSince1970 * 1000),
         @"transactionIdentifier": transaction.transactionIdentifier,
         @"productIdentifier": transaction.payment.productIdentifier,
-        @"transactionReceipt": [self grandUnifiedReceipt]
+        @"transactionReceipt": [[transaction transactionReceipt] base64EncodedStringWithOptions:0]
     }];
     // originalTransaction is available for restore purchase and purchase of cancelled/expired subscriptions
     SKPaymentTransaction *originalTransaction = transaction.originalTransaction;
